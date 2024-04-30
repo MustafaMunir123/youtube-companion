@@ -83,16 +83,28 @@ chunks.data.insert_many(chunks_list)
 response = chunks.aggregate.over_all(total_count=True)
 print(response.total_count)
 user_prompt = "Which process is the future at every level of cars:"
-user_prompt = "When is Rimac Nevera mentioned"
+user_prompt = "Rimac Nevera"
 
-response = chunks.generate.fetch_objects(
-    limit=3,
-    single_prompt=f'You are youtube companion bot that retrives the start_time and duration of video part according to user provided query that matches with data. ALong with user_prompt video_id is also provided so utilize it to fetch results return only this: {{"start_time": "<start_time>", "duration": "<duration>", "text": "<text>"}}. user_prompt: {user_prompt} video_id : {VIDEO_ID} ===== {{video_id}} {{chunk}}'
-)
+# response = chunks.generate.fetch_objects(
+#     limit=3,
+#     grouped_properties= ["chunk", "video_id"],
+#     single_prompt=f'You are youtube companion bot that retrives the start_time and duration of video part according to user provided query that matches with transcript. Along with user_prompt video_id is also provided so utilize it to fetch results return only this: {{"start_time": "<start_time>", "duration": "<duration>", "text": "<text>"}}. user_prompt: {user_prompt} video_id : {VIDEO_ID} ==== {{chunk}} {{video_id}}'
+# )
 # print(response)
+response = chunks.generate.near_text(
+        query="Rimac Nevera", 
+        limit=1,
+        single_prompt=f'You are youtube companion bot that retrives the start_time and duration of video part according to user provided query that matches with transcript. Along with user_prompt video_id is also provided so utilize it to fetch results return only this: {{"start_time": "<start_time>", "duration": "<duration>", "text": "<text>"}}. user_prompt: {user_prompt} video_id : {VIDEO_ID} ==== {{chunk}} {{video_id}}'
+    )
+print(response)
+
+# for o in response.objects:
+#     print(f"\n===== Object index: [{o.properties['chunk_index']}] =====")
+#     print(o.generated)
 
 for o in response.objects:
     print(f"\n===== Object index: [{o.properties['chunk_index']}] =====")
+    print(o.properties["chunk"])
     print(o.generated)
 
 for object in response.objects:
@@ -105,7 +117,7 @@ for object in response.objects:
     time = convert_time(float(start_time))
     print(time)
 
-# https://youtu.be/HLi2xYxZX10?t=5.0m0.12000000000000455s
+# https://youtu.be/HLi2xYxZX10?t=13.0m28.980000000000018s
 
 
 client.close()
