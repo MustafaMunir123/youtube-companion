@@ -92,7 +92,7 @@ user_prompt = "Rimac Nevera"
 # )
 # print(response)
 response = chunks.generate.near_text(
-        query="Rimac Nevera", 
+        query="Rimac Nevera wow", 
         limit=1,
         single_prompt=f'You are youtube companion bot that retrives the start_time and duration of video part according to user provided query that matches with transcript. Along with user_prompt video_id is also provided so utilize it to fetch results return only this: {{"start_time": "<start_time>", "duration": "<duration>", "text": "<text>"}}. user_prompt: {user_prompt} video_id : {VIDEO_ID} ==== {{chunk}} {{video_id}}'
     )
