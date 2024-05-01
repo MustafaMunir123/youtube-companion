@@ -1,6 +1,6 @@
 import spacy
 
-nouns = []
+nouns = ""
 
 nlp = spacy.load("en_core_web_sm") 
 
@@ -10,7 +10,7 @@ for word in text_tokens:
     doc = nlp(word) 
 
     if(doc[0].tag_ == 'NNP'):
-        nouns.append(word)
+        nouns += word + " "
         print(word, " is a noun.") 
     else: 
         print(word, " is not a noun.") 
