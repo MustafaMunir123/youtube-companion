@@ -1,4 +1,3 @@
-import pafy
 import json
 from pytube import Playlist, YouTube
 
@@ -12,7 +11,7 @@ for video_url in p:
     # video = pafy.new(video_url)
     print(video.title)
     data_dict[video_url] = video.title
-    
+
 # with open("playlist_data.json", "w+") as file:
 #     file.write(json.dumps(data_dict))
 
