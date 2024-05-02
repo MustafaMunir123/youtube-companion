@@ -17,5 +17,4 @@ for video_url in p:
 
 
 
-
-# https://www.youtube.com/watch?v=41qgdwd3zAg?t=13s
+# https://www.youtube.com/watch?v=41qgdwd3zAg&t=10.0m28.980000000000018s
