@@ -1,2 +1,2 @@
 # youtube-companion
-An open source youtube companion bot that lets you retrieve time-stamped urls with natural language.
+An open-source YouTube companion bot that lets you query YouTube playlists and videos in natural language.
