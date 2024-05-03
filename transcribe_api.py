@@ -9,7 +9,11 @@ def youtube_transcript_loader(video_id):
         logger.info(
             f"Loading transcript for youtube video id: {video_id} using YouTubeTranscriptApi "
         )
-        transcripts = YouTubeTranscriptApi.get_transcript(video_id)
+        try:
+            transcripts = YouTubeTranscriptApi.get_transcript(video_id, languages=('en',))
+        except Exception as e:
+            print(str(e))
+            return []
 
         entire_script = []
         length_of_transcripts = len(transcripts)
@@ -47,7 +51,7 @@ def youtube_transcript_loader(video_id):
                 combined_transcripts["duration"] += transcripts[i+5].get("duration")
             combined_transcripts["text"].strip(" ")
 
-            entire_script.append(f'start_time: {combined_transcripts["start_time"]}, duration: {combined_transcripts["duration"]}, text: {combined_transcripts["text"]}')
+            entire_script.append(f'{combined_transcripts}')
             # print(transcripts)
 
         logger.info(
@@ -60,8 +64,8 @@ def youtube_transcript_loader(video_id):
         raise Exception("Error in YouTubeTranscriptApi: ", e)
 
 # https://youtu.be/HLi2xYxZX10?feature=shared
-complete_transcripts = youtube_transcript_loader("HLi2xYxZX10")
-# print(len(complete_transcripts))
-for  transcription in complete_transcripts:
-    print(transcription)
-    print()
+# complete_transcripts = youtube_transcript_loader("HLi2xYxZX10")
+# # print(len(complete_transcripts))
+# for  transcription in complete_transcripts:
+#     print(transcription)
+#     print()
