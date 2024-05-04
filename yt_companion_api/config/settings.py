@@ -122,6 +122,31 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "yt-companion-postgres",
+#         "USER": "postgres",
+#         "PASSWORD": "postgres",
+#         "HOST": "postgres://avnadmin:AVNS_vUf8C0Nge8vZIIm3uIU@yt-companion-postgres-yt-companion.c.aivencloud.com:15213/defaultdb?sslmode=require'",
+#         "PORT": "5432",
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'defaultdb',
+#         'USER': 'avnadmin',
+#         'PASSWORD': 'AVNS_vUf8C0Nge8vZIIm3uIU',
+#         'HOST': 'yt-companion-postgres-yt-companion.c.aivencloud.com',
+#         'PORT': '15213',
+#         'OPTIONS': {
+#             'sslmode': 'require',
+#         },
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

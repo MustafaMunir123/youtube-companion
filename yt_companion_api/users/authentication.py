@@ -12,6 +12,7 @@ from firebase_admin import auth, credentials, firestore
 from rest_framework import status
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.response import Response
+import uuid
 
 
 User = get_user_model()
@@ -98,6 +99,7 @@ class FirebaseAuthentication(BaseAuthentication):
                 "full_name": full_name,
                 "email": email,
                 "image_url": image_url,
+                "username": str(uuid.uuid4())
             },
         )
         return user, is_new_user
