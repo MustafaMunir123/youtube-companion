@@ -41,6 +41,7 @@ class ChatAPIView(APIView):
                             serialized_time_stamps = TimeStampSerializer(time_stamps, many=True).data
                             videos_list.append(
                                 {
+                                    "prompt": conversation.prompt,
                                     "video_title": video.video_title,
                                     "video_id": video.video_id,
                                     "time_stamps": serialized_time_stamps
