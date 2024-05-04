@@ -10,6 +10,7 @@ class ChatAPIView(APIView):
     def get(self, request, chat_id):
         try:
             user = request.user
+            is_history = request.query_params.get("history")
             chat = Chat.objects.filter(user_id=user.id, id=chat_id).first()
             if not chat:
                 return custom_response(
@@ -19,32 +20,36 @@ class ChatAPIView(APIView):
                     data={}
                 )
             serialized_data = dict(ChatSerializer(chat).data)
-            conversation_id = serialized_data.pop("last_conversation_id")
-            conversation_id = conversation_id if conversation_id else ""
-            ai_last_response = {
-                "videos": []
-            }
-            
-            conversation = Conversation.objects.filter(id=conversation_id.strip()).first()
-            if conversation:
-                videos_list = []
+            # conversation_id = serialized_data.pop("last_conversation_id")
+            # conversation_id = conversation_id if conversation_id else ""
 
-                videos = Video.objects.filter(conversation_id=conversation_id)
-                for video in videos:
-                    time_stamps = TimeStamp.objects.filter(video_id=video.id).values("time_stamp", "caption", "id")
-                    if time_stamps:
-                        serialized_time_stamps = TimeStampSerializer(time_stamps, many=True).data
-                        videos_list.append(
-                            {
-                                "video_title": video.video_title,
-                                "video_id": video.video_id,
-                                "time_stamps": serialized_time_stamps
-                            }
-                        )
-                ai_last_response["videos"].extend(videos_list)
-                serialized_data.update(
-                    {"ai_last_response": ai_last_response}
-                )
+            if is_history == "true":
+                conversations = Conversation.objects.filter(chat_id=chat.id).order_by("created_at")
+                history = []
+                print(len(conversations))
+
+                
+                # conversation = Conversation.objects.filter(id=conversation_id.strip()).first()
+                # if conversation:
+                for conversation in conversations:
+                    videos_list = []
+
+                    videos = Video.objects.filter(conversation_id=conversation.id)
+                    for video in videos:
+                        time_stamps = TimeStamp.objects.filter(video_id=video.id).values("time_stamp", "caption", "id")
+                        if time_stamps:
+                            serialized_time_stamps = TimeStampSerializer(time_stamps, many=True).data
+                            videos_list.append(
+                                {
+                                    "video_title": video.video_title,
+                                    "video_id": video.video_id,
+                                    "time_stamps": serialized_time_stamps
+                                }
+                            )
+                    history.extend(videos_list)
+                    serialized_data.update(
+                        {"history": history}
+                    )
 
 
             return custom_response(
@@ -89,8 +94,6 @@ class ChatAPIView(APIView):
             raise e
 
 
-
-        
 class ChatListAPIView(ListAPIView):
     serializer_class = ChatSerializer
 
@@ -98,7 +101,7 @@ class ChatListAPIView(ListAPIView):
         try:
             user = request.user
 
-            chats = Chat.objects.filter(user_id=user.id).values("id", "chat_title", "status")
+            chats = Chat.objects.filter(user_id=user.id)
             if chats:
                 data = self.serializer_class(chats, many=True).data
             else:

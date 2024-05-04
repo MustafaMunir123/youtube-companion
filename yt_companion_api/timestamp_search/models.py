@@ -22,6 +22,7 @@ class Chat(UUIDMixin):
 class Conversation(UUIDMixin):
     chat = models.ForeignKey(Chat, related_name="user_prompts", on_delete=models.CASCADE)
     prompt = models.CharField(null=False, blank=False, max_length=1000)
+    created_at = models.DateTimeField(auto_created=True, auto_now=True)
     # video_title = models.CharField(max_length=1000, null=True, blank=True)
     # video_id = models.CharField(max_length=100, null=True, blank=True)
 

@@ -24,8 +24,8 @@ class ChatSerializer(serializers.Serializer):
     
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        print(data)
-        # data.pop("last_conversation_id")
+        # print(data)
+        data.pop("last_conversation_id")
         return data
     
 
@@ -33,6 +33,7 @@ class ConversationSerializer(serializers.Serializer):
     id = serializers.UUIDField(allow_null=True, required=False)
     chat_id = serializers.UUIDField()
     prompt = serializers.CharField(required=True, max_length=1000)
+    created_at = serializers.DateTimeField()
 
     def create(self, validated_data):
         return Conversation.objects.create(**validated_data)

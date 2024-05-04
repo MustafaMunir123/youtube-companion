@@ -7,6 +7,7 @@ import weaviate.classes as wvc
 from timestamp_search.playlist_utils import youtube_transcript_loader
 from timestamp_search.playlist_utils import get_video_urls_from_playlist, get_video_title, get_video_id, create_collection_name
 from timestamp_search.stopwards_removal import remove_stopwords
+from timestamp_search.models import Video, TimeStamp, Conversation
 from weaviate.classes.query import MetadataQuery, Filter
 from weaviate.classes.query import HybridFusion
 from django.conf import settings
@@ -36,7 +37,7 @@ def convert_time(seconds):
         return f"{seconds}s"
 
 class WeaviateAI:
-    def __init__(self, client, collection_name, url, is_playlist=False) -> None:
+    def __init__(self, client, collection_name, url, is_playlist=False, conversation_id=None) -> None:
         
         self.client = client
         self.collection_name = collection_name
@@ -44,6 +45,7 @@ class WeaviateAI:
         self.is_playlist = is_playlist
         self.url = url
         self.status = "training"
+        self.conversation_id=conversation_id
 
     def initiate_collection(self):
         if self.client.collections.exists(self.collection_name):  
@@ -166,18 +168,42 @@ class WeaviateAI:
 
             results = []
 
+
             for id, data in videos.items():
-                results.append(
-                    {
+                print("creating video")
+                
+                video = Video(
+                    video_title=data[0]["video_title"],
+                    conversation_id=self.conversation_id,
+                    video_id=id
+                )
+                video.save()
+                print(f"video_id {video.id}")
+
+                time_stamps = [
+                        {
+                        "time_stamp" : data_object["time_stamp"],
+                        "caption": data_object["caption"],
+                        "video_id": video.id
+                        } for data_object in data
+                    ]
+                time_stamps_objects = [
+                    TimeStamp(
+                        time_stamp=time_stamp["time_stamp"],
+                        caption=time_stamp["caption"],
+                        video_id=time_stamp["video_id"]
+                    ) for time_stamp in time_stamps
+                ]
+                TimeStamp.objects.bulk_create(time_stamps_objects)
+                
+                aggregated_data = {
                         "video_title": data[0]["video_title"],
-                        "id": id,
-                        "time_stamps": [
-                            {
-                            "time_stamp" : data_object["time_stamp"],
-                            "caption": data_object["caption"]
-                            } for data_object in data
-                        ]
+                        "video_id": id,
+                        "time_stamps": time_stamps
                     }
+
+                results.append(
+                    aggregated_data
                 )
             
             return results
@@ -237,15 +263,23 @@ def train_model(url, playlist, user_id, chat_id):
 
 def query_db(chat, user_id, prompt):
     collection_name = create_collection_name(chat_id=chat.id, user_id=user_id)
+    conversation = Conversation(
+        chat=chat,
+        prompt=prompt
+    )
+    conversation.save()
 
     weaviate_ai = WeaviateAI(
         client=settings.WEAVIATE_CLIENT,
         collection_name=collection_name,
         # url="https://youtube.com/playlist?list=PLS1QulWo1RIaJECMeUT4LFwJ-ghgoSH6n",
         url=chat.url,
-        is_playlist=chat.playlist
+        is_playlist=chat.playlist,
+        conversation_id=conversation.id
     )
 
-    results = weaviate_ai.query_vector_db(prompt)
+    results_limit = 5 if chat.playlist else 3
+
+    results = weaviate_ai.query_vector_db(prompt, results_limit)
     return results
 
