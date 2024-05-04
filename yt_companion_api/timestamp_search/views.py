@@ -48,9 +48,9 @@ class ChatAPIView(APIView):
                                 }
                             )
                     history.extend(videos_list)
-                    serialized_data.update(
-                        {"history": history}
-                    )
+                serialized_data.update(
+                    {"history": history}
+                )
 
 
             return custom_response(
