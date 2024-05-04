@@ -180,22 +180,24 @@ headers={
 assert client.is_ready()
 
 
-weaviate_ai = WeaviateAI(
-    client=client,
-    collection_name="test_collection",
-    url="https://youtube.com/playlist?list=PLS1QulWo1RIaJECMeUT4LFwJ-ghgoSH6n",
-    is_playlist=True
-)
+# weaviate_ai = WeaviateAI(
+#     client=client,
+#     collection_name="test_collection",
+#     url="https://youtube.com/playlist?list=PLS1QulWo1RIaJECMeUT4LFwJ-ghgoSH6n",
+#     is_playlist=True
+# )
 
-start_time = time.time()
+# start_time = time.time()
 
-# weaviate_ai.initiate_collection()
-# weaviate_ai.vectorize_video_data()
-results = weaviate_ai.query_vector_db("sockets implementation in python")
-print(results)
+# # weaviate_ai.initiate_collection()
+# # weaviate_ai.vectorize_video_data()
+# results = weaviate_ai.query_vector_db("sockets implementation in python")
+# print(results)
 
-weaviate_ai.client.close()
-end_time = time.time()
-print(end_time-start_time)
+# weaviate_ai.client.close()
+# end_time = time.time()
+# print(end_time-start_time)
 
 # https://www.youtube.com/watch?v=7pGuwV4rwH0&t=3.0m17.28s
+client.collections.delete_all()
+client.close()

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "mush-financing-api",
+  "private_key_id": "4aa4ce63372ea37230eff78ad0b06da202c380ec",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC/DAdY7celLues\nOvPtVdnUtNbhMRFLiOIjINpVUHR0FG2Z3t3uBM5b3mizIq2XFdtFhHnZVyznZnsB\nzGXDohNCRU0Fkk0dFgWXWK0m/Gn8svas1ed/M+lSSBKTstGKJo9qSmLKbsePriMp\nigldhqmh+ClWLyAqJhFL8IFgvGaygL/5iExCvY8Y3oRtHLsQoR/ShcP3Y07DhYyU\n1sO2KZgKjND9oHx2Tv1XF7GhEgBRkmFY3HVxvmoj2kd7g9XZCdiKHbalvvM3KvPj\nB060jDgLA3soe+pK3+cMpyZDb8WTHF1eZpndKMDpl80lBMeqwY4V9rDwYz2tC991\nQf1sx/MnAgMBAAECggEABxOPfBxGnlg37Zm7akmZSXcvVGUIYndeBPYVED7sKVaO\nXroyFzxnVmDNGQGKU4PUPOV0y/eeKq4RlVX4WQA6XWSKv0+VeqPTrjDzLPQBiwIn\n/+vmaMBH/qu7wGvJtifKfSHnOd9Tlf9ZvxKlWSkBRIYYJeCV/OmvD1SHvkkMNsVc\nmjvqUnsVGSekQXMJ+AOHJQKDhlx/5kWP31rX0TGPDchiS6RU3qdGPzNhMoXvQiKj\nGSvDN2/YY4sxFEo6mnL+hsDzq05FhjPjp8lptRDuc9BRLzmCW8HnFaer03EvaZ/k\ndcs3jA/+2E9YWVzkQDPYIIEZB2ju+Jdrh1qWqf+q/QKBgQD3i4EXbtAMpsFhtUYf\nLEGoFizHSc2AAMGwLTTuB9HWpfqYecMxmmtI/Sghwzoo0MQrAHy6qz8S/WZ0Kp7l\ng8AUSS7GTAK2BiELYw0XY+pSQakSyMIyJPDi2+rZRv5mhHtfLuDSRcnp3PsFDTh2\ni3LQ0arC12SM3GWi1Jyo5660SwKBgQDFkoPMpWDEYoiN6CjtguCILulNk+dMpj4f\n6CnAleO5qIuskbgC/Z70yfjM4mqprJTsfe6IL+V+wvGtTNq4eWW3NBHai9WRI5oV\nq5PDk6LzQmQOrWAErsp94hbkM4sr0xDFD3HP5J06dtdzz1KopItKVU3uJkleIhMc\nHhN6vUXbFQKBgB2QYKt+xYQtSj00HBrO+0xq0ZA/hTZ7YKZ8z6x57Jq5GfOp3yEG\ncze1XFyj50dGn5cPKNZWa2MGNn07NdztXjxN/TMbkttQYhPtEXwwp6SJSPsAVQkO\nFmLRpvuqGen+eomEnL8gLJwskyIoUQz/XIgJ8l3wwYZ9L/pBcDBP8zJ/AoGAaq+k\nRhSjfUhrzp0nxKFgl4klaEPOqaA3eclHCnyl/LIbwjLpt4u2kx6hIBm/WSIdRNr3\nvEiI13tzP455qRW8rEIMxgOubnJYGQ2OfBSz8EHQf/B1IfI02+cDT3TZ2O9fZdni\nLk2X7WMRErNIQlKf+KK5szivc4pY4V0ITcX4+8UCgYEAhiDwH8dyVFWsTZuHRMNg\n5oAj9Ub7kHMR8GKn/Vzc7caUEM+p7y0OUof27BKpYUF5ShKoVqGLXuGM1WLXqznv\nHcZL067JjTCy3Gi6kwcOK/j1Kuv4HQclLQK1tdChIW2y/HB6rv0/s7EzButOpX1d\nDf/iCCr/Mhal4Ty4gXE8bXo=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-qt49t@mush-financing-api.iam.gserviceaccount.com",
+  "client_id": "113381982802260926573",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-qt49t%40mush-financing-api.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

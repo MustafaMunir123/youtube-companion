@@ -36,6 +36,7 @@ def get_video_id(video_url):
     video = YouTube(video_url)
     return video.video_id
 
+# print(get_video_id("https://www.youtube.com/watch?v=tpIctyqH29Q&list=PLME-KWdxI8dcaHSzzRsNuOLXtM2Ep_C7a&index=2"))
 
 # with open("playlist_data.json", "w+") as file:
 #     file.write(json.dumps(data_dict))
