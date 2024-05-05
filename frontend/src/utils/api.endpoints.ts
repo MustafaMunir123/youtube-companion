@@ -4,10 +4,10 @@ export const SEED_SERVICE_PATH =
   process.env.NODE_ENV === 'development'
     ? `${process.env.NEXT_PUBLIC_API_URL}/seed/v1`
     : 'http://localhost:8080/seed/v1';
-export const AI_SERVICE_PATH = "https://4639-101-53-226-26.ngrok-free.app/api"
-  // process.env.NODE_ENV === 'production'
-  //   ? `${process.env.NEXT_PUBLIC_AI_SERVICE_URL}/api`
-  //   : 'http://localhost:8000/api';
+export const AI_SERVICE_PATH = 
+  process.env.NODE_ENV === 'production'
+    ? `${process.env.NEXT_PUBLIC_AI_SERVICE_URL}/api`
+    : 'http://localhost:8000/api';
 
 console.log('API_BASE_URL', API_BASE_URL, AI_SERVICE_PATH);
 
