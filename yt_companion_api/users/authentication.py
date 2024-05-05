@@ -10,6 +10,7 @@ from django.contrib.auth import get_user_model
 from django.utils.autoreload import logger
 from firebase_admin import auth, credentials, firestore
 from rest_framework import status
+from rest_framework.exceptions import NotAuthenticated
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.response import Response
 import uuid
@@ -55,7 +56,7 @@ class FirebaseAuthentication(BaseAuthentication):
             decoded_token = auth.verify_id_token(id_token)
         except Exception as e:
             logger.debug(f"Invalid authentication token has been provided. {e}")
-            raise ValueError("Invalid authentication token.")
+            raise NotAuthenticated("Invalid authentication token.")
 
         if not id_token or not decoded_token:
             raise ValueError("Tokens have not been found.")

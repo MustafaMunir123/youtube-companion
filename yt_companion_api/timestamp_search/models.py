@@ -9,7 +9,7 @@ TRAINING_STATUSES = (
 )
 
 class Chat(UUIDMixin):
-    chat_title = models.CharField(null=False, blank=False, max_length=200)
+    chat_title = models.CharField(null=False, blank=False, max_length=200, unique=True)
     url = models.URLField(null=False, blank=False)
     playlist = models.BooleanField(default=False, null=True, blank=True)
     last_conversation_id = models.UUIDField(null=True, blank=True)

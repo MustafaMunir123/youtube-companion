@@ -71,6 +71,13 @@ class ChatAPIView(APIView):
 
             if "playlist" in url:
                 playlist = True
+            if Chat.objects.filter(chat_title=chat_title).exists():
+                return custom_response(
+                    response_status=status.HTTP_400_BAD_REQUEST,
+                    message=f"Chat with title `{chat_title}` already exists",
+                    success=False,
+                    data={}
+                )
             chat = Chat(
                 chat_title=chat_title,
                 url=url,
