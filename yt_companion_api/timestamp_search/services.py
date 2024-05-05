@@ -153,7 +153,7 @@ class WeaviateAI:
                 text = json_object["text"]
                 # video_title = chunk["video_title"]
 
-                start_time = convert_time(float(start_time))
+                # start_time = convert_time(float(start_time))
                 print(start_time)
 
                 if not video_id in videos.keys():
