@@ -23,18 +23,18 @@ COLLECTION_NAME = "TEST_1"  # "YOUTUBE_COMPANION"
 VIDEO_ID = "HLi2xYxZX10"
 
 
-def convert_time(seconds):
-    seconds = seconds % (24.0 * 3600.0)
-    hour = seconds // 3600.0
-    seconds %= 3600.0
-    minutes = seconds // 60.0
-    seconds %= 60.0
-    if hour:
-        return f"{hour}h{minutes}m{seconds}s"
-    elif minutes:
-        return f"{minutes}m{seconds}s"
-    else:
-        return f"{seconds}s"
+# def convert_time(seconds):
+#     seconds = seconds % (24.0 * 3600.0)
+#     hour = seconds // 3600.0
+#     seconds %= 3600.0
+#     minutes = seconds // 60.0
+#     seconds %= 60.0
+#     if hour:
+#         return f"{hour}h{minutes}m{seconds}s"
+#     elif minutes:
+#         return f"{minutes}m{seconds}s"
+#     else:
+#         return f"{seconds}s"
 
 class WeaviateAI:
     def __init__(self, client, collection_name, url, is_playlist=False, conversation_id=None) -> None:
@@ -153,8 +153,7 @@ class WeaviateAI:
                 text = json_object["text"]
                 # video_title = chunk["video_title"]
 
-                # start_time = convert_time(float(start_time))
-                print(start_time)
+                print("start time in qv db::==",start_time)
 
                 if not video_id in videos.keys():
                     videos[video_id] = []
