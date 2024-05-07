@@ -124,20 +124,6 @@ DATABASES = {
 }
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'defaultdb',
-#         'USER': 'avnadmin',
-#         'PASSWORD': 'AVNS_vUf8C0Nge8vZIIm3uIU',
-#         'HOST': 'yt-companion-postgres-yt-companion.c.aivencloud.com',
-#         'PORT': '15213',
-#         'OPTIONS': {
-#             'sslmode': 'require',
-#         },
-#     }
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -221,8 +207,6 @@ FIREBASE_AUTH_PROVIDER_X509_CERT_URL = os.environ.get(
 FIREBASE_CLIENT_X509_CERT_URL = os.environ.get("FIREBASE_CLIENT_X509_CERT_URL")
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
-# Firebase
-FIREBASE = os.environ.get("FIREBASE")
 FB_EMAIL = os.environ.get("FB_EMAIL")
 FB_PASSWORD = os.environ.get("FB_PASSWORD")
 
