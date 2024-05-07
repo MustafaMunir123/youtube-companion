@@ -38,33 +38,32 @@ The YouTube Companion project utilizes the following technologies:
 To get started with contributing to YouTube Companion, follow these steps after forking the repo:
 
 1. Fil up .env in `yt_companion_api/` and `frontend/`
-   ```
-   #------------- DJANGO SECRET KEY -------------
-   SECRET_KEY=
-   
-   #------------ FIREBASE CREDENTIALS -----------
-   FIREBASE_ACCOUNT_TYPE=
-   FIREBASE_PROJECT_ID=
-   FIREBASE_PRIVATE_KEY_ID=
-   FIREBASE_PRIVATE_KEY=
-   FIREBASE_CLIENT_EMAIL=
-   FIREBASE_CLIENT_ID=
-   FIREBASE_AUTH_URI=
-   FIREBASE_TOKEN_URI=
-   FIREBASE_AUTH_PROVIDER_X509_CERT_URL=
-   FIREBASE_CLIENT_X509_CERT_URL=
-   UNIVERSE_DOMAIN=googleapis.com
-   FB_EMAIL=
-   FB_PASSWORD=
-   
-   #----------- WEAVIATE -------------------------
-   WCS_API_KEY=
-   WCS_URL=
-   
-   #----------- OPENAI ---------------------------
-   OPENAI_API_KEY=
+   - `yt_companion_api/` 
+      ```
+      #------------- DJANGO SECRET KEY -------------
+      SECRET_KEY=
+      
+      #------------ FIREBASE CREDENTIALS -----------
+      FIREBASE_ACCOUNT_TYPE=
+      FIREBASE_PROJECT_ID=
+      FIREBASE_PRIVATE_KEY_ID=
+      FIREBASE_PRIVATE_KEY=
+      FIREBASE_CLIENT_EMAIL=
+      FIREBASE_CLIENT_ID=
+      FIREBASE_AUTH_URI=
+      FIREBASE_TOKEN_URI=
+      FIREBASE_AUTH_PROVIDER_X509_CERT_URL=
+      FIREBASE_CLIENT_X509_CERT_URL=
+      UNIVERSE_DOMAIN=googleapis.com
+      
+      #----------- WEAVIATE -------------------------
+      WCS_API_KEY=
+      WCS_URL=
+      
+      #----------- OPENAI ---------------------------
+      OPENAI_API_KEY=
 
-   ``` 
+      ``` 
 
 1. Clone the repository to your local machine:
    ```
