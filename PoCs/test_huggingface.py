@@ -9,7 +9,6 @@ from google.auth.transport.requests import Request
 from google.oauth2.service_account import Credentials
 import weaviate
 import os
-# from transcribe_api import youtube_transcript_loader
 
 load_dotenv()
 
@@ -23,7 +22,7 @@ VIDEO_ID = "HLi2xYxZX10"
 
 def get_credentials() -> Credentials:
     credentials = Credentials.from_service_account_file(
-        "./gen-lang-client-0755886913-87490b219864.json",
+        "gen-lang-client-0755886913-052b72478f1e.json",
         scopes=[
             "https://www.googleapis.com/auth/generative-language",
             "https://www.googleapis.com/auth/cloud-platform",
@@ -33,22 +32,28 @@ def get_credentials() -> Credentials:
     credentials.refresh(request)
     return credentials
 
-credentials = get_credentials()
-token = credentials.token
+# credentials = get_credentials()
+# token = credentials.token
 
-client = weaviate.connect_to_wcs(
-    cluster_url=URL,
-    auth_credentials=weaviate.auth.AuthApiKey(APIKEY),
-    headers={
-        "X-Palm-Api-Key": token  # os.getenv("GEMINI_API_KEY")  # <-- Replace with your API key
-    })
+def re_instantiate_weaviate() -> weaviate.Client:
+    credentials = get_credentials()
+    token = credentials.token
+
+    client = weaviate.connect_to_wcs(  # e.g. if you use the Weaviate Cloud Service
+        cluster_url=URL,  # Replace WEAVIATE_INSTANCE_URL with the URL
+        auth_credentials=weaviate.auth.AuthApiKey(APIKEY),  # Replace with your WCS key
+        headers={
+            "X-PaLM-Api-Key": token,
+        },
+    )
+    return client, credentials
+
+
+# Run this every ~60 minutes
+client, credentials = re_instantiate_weaviate()
 assert client.is_ready()
-print("~/" *100, credentials.project_id)
-# collection_name = "GitBookChunk"
 
-# chunks = client.collections.get(collection_name)
-# response = chunks.query.near_text(query="history of git", limit=3)
-# print(response)
+print(credentials.project_id)
 
 
 if client.collections.exists(COLLECTION_NAME):  
@@ -70,15 +75,11 @@ chunks = client.collections.create(
             data_type=wvc.config.DataType.INT
         ),
     ],
-    vectorizer_config=wvc.config.Configure.Vectorizer.text2vec_palm(project_id=credentials.project_id),  # Use `text2vec-openai` as the vectorizer
+    vectorizer_config=wvc.config.Configure.Vectorizer.text2vec_palm(credentials.project_id),  # Use `text2vec-openai` as the vectorizer
     generative_config=wvc.config.Configure.Generative.palm(project_id=credentials.project_id),  # Use `generative-openai` with default parameters
 )
 
 chunks = client.collections.get(COLLECTION_NAME)
-
-# chunks.query.fetch_objects(
-#     limit=3
-# )
 
 response = chunks.generate.near_text(
         query="Rimac Nevera", 
@@ -93,6 +94,3 @@ for o in response.objects:
     print(o.metadata.distance)
 
 client.close()
-
-# for object in response.objects:
-#     print(object)
