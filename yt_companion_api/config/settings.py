@@ -20,10 +20,6 @@ import weaviate
 load_dotenv()
 
 
-WEAVIATE_URL = os.getenv("WCS_URL")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-WEAVIATE_APIKEY = os.getenv("WCS_API_KEY")
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -205,10 +201,14 @@ FIREBASE_AUTH_PROVIDER_X509_CERT_URL = os.environ.get(
     "FIREBASE_AUTH_PROVIDER_X509_CERT_URL"
 )
 FIREBASE_CLIENT_X509_CERT_URL = os.environ.get("FIREBASE_CLIENT_X509_CERT_URL")
-STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
-FB_EMAIL = os.environ.get("FB_EMAIL")
-FB_PASSWORD = os.environ.get("FB_PASSWORD")
+#-------------- WEAVIATE -------------
+WEAVIATE_URL = os.getenv("WCS_URL")
+WEAVIATE_APIKEY = os.getenv("WCS_API_KEY")
+
+#-------------- OPENAI API KEY --------
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
 
 WEAVIATE_CLIENT = weaviate.connect_to_wcs(
 cluster_url=WEAVIATE_URL,
